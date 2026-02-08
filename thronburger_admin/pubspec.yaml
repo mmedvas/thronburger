@@ -1,0 +1,59 @@
+name: thronburger_admin
+description: "Thronburger - Staff Admin Panel (Web)"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
+
+  # Audio (notifications)
+  audioplayers: ^6.1.0
+
+  # Backend - Firebase
+  firebase_core: ^3.10.0
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.2
+  firebase_storage: ^12.3.7
+
+  # State Management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Charts & Reports
+  fl_chart: ^0.69.2
+
+  # Printing (for receipts)
+  printing: ^5.13.3
+  pdf: ^3.11.2
+
+  # Utilities
+  intl: ^0.20.1
+
+  # File picking (for image upload)
+  file_picker: ^8.0.0+1
+  universal_html: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/sounds/
+    - assets/images/

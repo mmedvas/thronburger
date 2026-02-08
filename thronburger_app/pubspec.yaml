@@ -1,0 +1,88 @@
+name: thronburger_app
+description: "Thronburger - Premium Burger Restaurant POS & Admin App"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+
+  # Backend - Firebase
+  firebase_core: ^3.10.0
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.2
+  firebase_storage: ^12.3.7
+  firebase_crashlytics: ^4.2.1
+
+  # State Management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Charts & Reports
+  fl_chart: ^0.69.2
+
+  # Printing
+  printing: ^5.13.3
+  pdf: ^3.11.2
+
+  # Audio Notifications  
+  audioplayers: ^6.1.0
+
+  # Utilities
+  intl: ^0.20.1
+  shared_preferences: ^2.5.2
+  json_annotation: ^4.9.0
+  uuid: ^4.5.1
+  flutter_local_notifications: ^20.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  json_serializable: ^6.9.3
+  build_runner: ^2.4.14
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.5
+
+# Launcher Icons Configuration
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  adaptive_icon_background: "#0F0F0F"
+  adaptive_icon_foreground: "assets/icons/app_icon.png"
+  web:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+
+# Native Splash Screen Configuration
+flutter_native_splash:
+  color: "#0F0F0F"
+  image: assets/icons/app_icon.png
+  android_12:
+    color: "#0F0F0F"
+    icon_background_color: "#0F0F0F"
+    image: assets/icons/app_icon.png
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/icons/

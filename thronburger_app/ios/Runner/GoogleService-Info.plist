@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>452905851509-ao9idn1v0cq339i1g2anio6eqjhbmugu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.452905851509-ao9idn1v0cq339i1g2anio6eqjhbmugu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCQOLZDmROeEA6GRPy0DoACIDfnyTZI6_o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>452905851509</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.thronburger.thronburgerApp</string>
+	<key>PROJECT_ID</key>
+	<string>throunburger</string>
+	<key>STORAGE_BUCKET</key>
+	<string>throunburger.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:452905851509:ios:5ff44cfb097f82a616b63c</string>
+</dict>
+</plist>

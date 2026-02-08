@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isStaff() {
+      return isAuthenticated() && 
+             firestore.exists(/databases/(default)/documents/user_roles/$(request.auth.uid));
+    }
+    
+    // Menu images
+    match /menu-images/{imageFile} {
+      // Anyone can read menu images (public)
+      allow read: if true;
+      // Only staff can upload/delete menu images
+      allow write, delete: if isStaff();
+    }
+    
+    // Default: deny all other access
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

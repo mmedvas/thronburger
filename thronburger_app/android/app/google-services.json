@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "452905851509",
+    "project_id": "throunburger",
+    "storage_bucket": "throunburger.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452905851509:android:394461c488cfed4016b63c",
+        "android_client_info": {
+          "package_name": "com.thronburger.thronburger_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452905851509-k1coh69qnh7v37eliv8redl0crqo65ni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thronburger.thronburger_app",
+            "certificate_hash": "a08397eabf37f3c6c14470a0785f68286dcc5053"
+          }
+        },
+        {
+          "client_id": "452905851509-qg8b5mb14g6t5ccrkek466d5f1fn58lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD74jr5EsjFs3h4mu965tm0LEnDbwEIQLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452905851509-qg8b5mb14g6t5ccrkek466d5f1fn58lo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "452905851509-ao9idn1v0cq339i1g2anio6eqjhbmugu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thronburger.thronburgerApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

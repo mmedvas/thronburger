@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Staff profiles - only authenticated staff can read/write their own
+    match /profiles/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // User roles - read by authenticated, write by admin only
+    match /user_roles/{userId} {
+      allow read: if request.auth != null;
+      allow write: if false; // Only set via Firebase Console or Admin SDK
+    }
+
+    // Menu items - public read, staff write
+    match /menu_items/{itemId} {
+      allow read: if true; // Public menu
+      allow write: if request.auth != null; // Staff only
+    }
+
+    // Orders - staff can read/write all, customers can read/write their own
+    match /orders/{orderId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if false; // Never delete orders
+
+      // Order items subcollection
+      match /items/{itemId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null;
+      }
+    }
+
+    // Customers - customers can read/write their own profile
+    match /customers/{customerId} {
+      allow read: if request.auth != null && request.auth.uid == customerId;
+      allow create: if request.auth != null && request.auth.uid == customerId;
+      allow update: if request.auth != null && request.auth.uid == customerId;
+      allow delete: if false;
+
+      // Customer addresses subcollection
+      match /addresses/{addressId} {
+        allow read: if request.auth != null && request.auth.uid == customerId;
+        allow write: if request.auth != null && request.auth.uid == customerId;
+      }
+    }
+    // Counters - for generating sequential IDs
+    match /counters/{counterId} {
+      allow read, create, update: if request.auth != null;
+    }
+  }
+}

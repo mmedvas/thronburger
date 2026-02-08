@@ -1,0 +1,225 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Thronburger",
+  "@appTitle": {
+    "description": "The app title"
+  },
+
+  "roleSelectionTitle": "Welcome to Thronburger",
+  "roleSelectionSubtitle": "What would you like to do?",
+  "orderFood": "Order Food",
+  "orderFoodDesc": "Browse menu & place an order",
+  "staffLogin": "Staff Login",
+  "staffLoginDesc": "Access POS & admin features",
+
+  "phoneInputTitle": "Enter your phone number",
+  "phoneInputSubtitle": "We'll send you a verification code",
+  "phoneHint": "Phone number",
+  "sendCode": "Send Code",
+  "invalidPhone": "Please enter a valid phone number",
+
+  "otpTitle": "Verify your phone",
+  "otpSubtitle": "Enter the 6-digit code sent to {phone}",
+  "@otpSubtitle": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "verify": "Verify",
+  "resendCode": "Resend Code",
+  "resendCodeIn": "Resend code in {seconds}s",
+  "@resendCodeIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "invalidOtp": "Invalid verification code",
+  "otpExpired": "Code expired. Please request a new one.",
+
+  "nameEntryTitle": "What's your name?",
+  "nameEntrySubtitle": "This helps us personalize your experience",
+  "nameHint": "Your name",
+  "continueBtn": "Continue",
+  "skip": "Skip",
+
+  "home": "Home",
+  "menu": "Menu",
+  "cart": "Cart",
+  "orders": "Orders",
+  "profile": "Profile",
+
+  "welcomeBack": "Welcome back, {name}!",
+  "@welcomeBack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "browseMenu": "Browse our menu",
+  "viewOrders": "View your orders",
+  "quickActions": "Quick Actions",
+
+  "allCategories": "All",
+  "burgers": "Burgers",
+  "sides": "Sides",
+  "drinks": "Drinks",
+  "combos": "Combos",
+
+  "addToCart": "Add to Cart",
+  "itemAdded": "Added to cart",
+  "viewCart": "View Cart",
+  "emptyCart": "Your cart is empty",
+  "emptyCartSubtitle": "Add some delicious items from our menu",
+  "browseMenuBtn": "Browse Menu",
+
+  "cartTotal": "Total",
+  "itemNotes": "Special instructions",
+  "itemNotesHint": "e.g., No onions, extra sauce",
+  "checkout": "Checkout",
+  "clearCart": "Clear Cart",
+  "clearCartConfirm": "Are you sure you want to clear your cart?",
+  "clear": "Clear",
+  "cancel": "Cancel",
+
+  "checkoutTitle": "Checkout",
+  "deliveryAddress": "Delivery Address",
+  "selectAddress": "Select delivery address",
+  "addNewAddress": "Add New Address",
+  "noAddresses": "No addresses saved",
+  "orderNotes": "Order Notes",
+  "orderNotesHint": "Any special requests for your order",
+  "placeOrder": "Place Order",
+  "orderTotal": "Order Total",
+
+  "addressLabel": "Label",
+  "addressLabelHint": "e.g., Home, Work",
+  "area": "Area",
+  "areaHint": "e.g., Downtown",
+  "street": "Street",
+  "streetHint": "Street name",
+  "building": "Building",
+  "buildingHint": "Building name/number",
+  "apartment": "Apartment",
+  "apartmentHint": "Apartment number (optional)",
+  "landmark": "Landmark",
+  "landmarkHint": "Nearby landmark (optional)",
+  "addressNotes": "Notes",
+  "addressNotesHint": "Delivery instructions (optional)",
+  "setAsDefault": "Set as default address",
+  "saveAddress": "Save Address",
+  "deleteAddress": "Delete Address",
+  "deleteAddressConfirm": "Are you sure you want to delete this address?",
+  "delete": "Delete",
+  "editAddress": "Edit Address",
+
+  "orderPlaced": "Order Placed!",
+  "orderPlacedSubtitle": "Your order #{orderNumber} has been received",
+  "@orderPlacedSubtitle": {
+    "placeholders": {
+      "orderNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "trackOrder": "Track Order",
+  "backToHome": "Back to Home",
+
+  "orderTracking": "Order Tracking",
+  "orderNumber": "Order #{number}",
+  "@orderNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "orderStatus": "Order Status",
+  "statusPending": "Pending",
+  "statusPreparing": "Preparing",
+  "statusReady": "Ready",
+  "statusCompleted": "Completed",
+  "statusCancelled": "Cancelled",
+  "estimatedTime": "Estimated time: {minutes} mins",
+  "@estimatedTime": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+
+  "orderHistory": "Order History",
+  "noOrders": "No orders yet",
+  "noOrdersSubtitle": "Your order history will appear here",
+  "orderDate": "Ordered on {date}",
+  "@orderDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "viewDetails": "View Details",
+  "reorder": "Reorder",
+
+  "profileTitle": "Profile",
+  "personalInfo": "Personal Information",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "addresses": "Saved Addresses",
+  "manageAddresses": "Manage Addresses",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "kurdish": "Kurdish",
+  "logout": "Log Out",
+  "logoutConfirm": "Are you sure you want to log out?",
+
+  "operatingHours": "Operating Hours",
+  "openingTime": "4:00 PM - 11:00 PM",
+  "closedMessage": "We're currently closed",
+  "closedSubtitle": "We open at 4:00 PM. See you soon!",
+
+  "error": "Error",
+  "somethingWentWrong": "Something went wrong",
+  "tryAgain": "Try Again",
+  "noInternet": "No internet connection",
+  "loading": "Loading...",
+  "save": "Save",
+  "edit": "Edit",
+  "done": "Done",
+  "ok": "OK",
+  "yes": "Yes",
+  "no": "No",
+
+  "currency": "IQD",
+  "priceFormat": "{price} IQD",
+  "@priceFormat": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+
+  "itemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@itemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "rateLimitError": "Too many attempts. Please wait a few minutes.",
+  "phoneRequired": "Phone number is required",
+  "nameRequired": "Name is required",
+  "addressRequired": "Please select a delivery address"
+}
