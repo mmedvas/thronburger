@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:printing/printing.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
 import '../../../config/theme.dart';
 import '../../../models/models.dart';
+import '../../../services/printing/printing_service.dart';
 
 /// Receipt Dialog
-/// Shows order receipt with print option
+/// Shows order receipt with print options for kitchen ticket and receipt
 class ReceiptDialog extends StatelessWidget {
   final Order order;
 
@@ -46,6 +44,27 @@ class ReceiptDialog extends StatelessWidget {
                     const Text(
                       'Empire City, Erbil',
                       style: TextStyle(color: Colors.black54),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // Order type badge
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primary.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        order.orderType.label.toUpperCase(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const Divider(color: Colors.black26),
@@ -162,28 +181,46 @@ class ReceiptDialog extends StatelessWidget {
               decoration: const BoxDecoration(
                 border: Border(top: BorderSide(color: Colors.black12)),
               ),
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
+                  // Print buttons row
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => _printKitchenTicket(context),
+                          icon: const Icon(Icons.restaurant, size: 18),
+                          label: const Text('Kitchen'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.orange.shade700,
+                            side: BorderSide(color: Colors.orange.shade300),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () => _printReceipt(context),
+                          icon: const Icon(Icons.receipt_long, size: 18),
+                          label: const Text('Receipt'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primary,
+                            foregroundColor: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  // Close button
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.black87,
-                        side: const BorderSide(color: Colors.black26),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black54,
                       ),
                       child: const Text('Close'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () => _printReceipt(context),
-                      icon: const Icon(Icons.print),
-                      label: const Text('Print'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.primary,
-                        foregroundColor: Colors.black,
-                      ),
                     ),
                   ),
                 ],
@@ -195,123 +232,33 @@ class ReceiptDialog extends StatelessWidget {
     );
   }
 
+  Future<void> _printKitchenTicket(BuildContext context) async {
+    try {
+      await PrintingService().printKitchenTicket(order);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to print kitchen ticket: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   Future<void> _printReceipt(BuildContext context) async {
-    final pdf = pw.Document();
-    final formatter = NumberFormat('#,###', 'en');
-    final dateFormatter = DateFormat('MMM d, yyyy h:mm a');
-
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.roll80,
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.center,
-            children: [
-              pw.Text(
-                'THRONBURGER',
-                style: pw.TextStyle(
-                  fontSize: 18,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.SizedBox(height: 4),
-              pw.Text(
-                'Empire City, Erbil',
-                style: const pw.TextStyle(fontSize: 10),
-              ),
-              pw.SizedBox(height: 12),
-              pw.Divider(),
-              pw.SizedBox(height: 8),
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                children: [
-                  pw.Text('Order #', style: const pw.TextStyle(fontSize: 10)),
-                  pw.Text(
-                    '${order.orderNumber}',
-                    style: pw.TextStyle(
-                      fontSize: 14,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                children: [
-                  pw.Text('Date', style: const pw.TextStyle(fontSize: 10)),
-                  pw.Text(
-                    dateFormatter.format(order.createdAt.toLocal()),
-                    style: const pw.TextStyle(fontSize: 10),
-                  ),
-                ],
-              ),
-              pw.SizedBox(height: 8),
-              pw.Divider(),
-              pw.SizedBox(height: 8),
-              ...order.items.map(
-                (item) => pw.Padding(
-                  padding: const pw.EdgeInsets.only(bottom: 6),
-                  child: pw.Row(
-                    children: [
-                      pw.SizedBox(
-                        width: 20,
-                        child: pw.Text(
-                          '${item.quantity}x',
-                          style: const pw.TextStyle(fontSize: 10),
-                        ),
-                      ),
-                      pw.Expanded(
-                        child: pw.Text(
-                          item.menuItem?.name ?? 'Item',
-                          style: const pw.TextStyle(fontSize: 10),
-                        ),
-                      ),
-                      pw.Text(
-                        formatter.format(item.lineTotal.toInt()),
-                        style: const pw.TextStyle(fontSize: 10),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              pw.SizedBox(height: 8),
-              pw.Divider(),
-              pw.SizedBox(height: 8),
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                children: [
-                  pw.Text(
-                    'TOTAL',
-                    style: pw.TextStyle(
-                      fontSize: 12,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                  pw.Text(
-                    '${formatter.format(order.totalAmount.toInt())} IQD',
-                    style: pw.TextStyle(
-                      fontSize: 12,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              pw.SizedBox(height: 16),
-              pw.Text(
-                'Thank you for your order!',
-                style: pw.TextStyle(
-                  fontSize: 10,
-                  fontStyle: pw.FontStyle.italic,
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-
-    await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf.save(),
-    );
+    try {
+      await PrintingService().printReceipt(order);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to print receipt: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

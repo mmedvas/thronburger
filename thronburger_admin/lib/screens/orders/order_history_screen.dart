@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../config/theme.dart';
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
+import '../../services/printing/printing_service.dart';
 
 /// Order History Screen
 /// Shows completed and cancelled orders with filtering
@@ -450,10 +451,77 @@ class _OrderHistoryCard extends StatelessWidget {
                   ),
                 ],
               ),
+
+              // Print buttons
+              const SizedBox(height: 24),
+              const Divider(),
+              const SizedBox(height: 16),
+              const Text(
+                'Reprint',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => _printKitchenTicket(context, order),
+                      icon: const Icon(Icons.restaurant, size: 18),
+                      label: const Text('Kitchen Ticket'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.orange.shade700,
+                        side: BorderSide(color: Colors.orange.shade300),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () => _printReceipt(context, order),
+                      icon: const Icon(Icons.receipt_long, size: 18),
+                      label: const Text('Receipt'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primary,
+                        foregroundColor: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _printKitchenTicket(BuildContext context, Order order) async {
+    try {
+      await PrintingService().printKitchenTicket(order);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to print kitchen ticket: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _printReceipt(BuildContext context, Order order) async {
+    try {
+      await PrintingService().printReceipt(order);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to print receipt: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

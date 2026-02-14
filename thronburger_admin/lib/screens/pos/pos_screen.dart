@@ -6,6 +6,7 @@ import '../../blocs/cart/cart_bloc.dart';
 import '../../config/theme.dart';
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
+import '../../services/printing/printing_service.dart';
 import 'widgets/menu_grid.dart';
 import 'widgets/cart_panel.dart';
 import 'widgets/receipt_dialog.dart';
@@ -87,6 +88,9 @@ class _PosScreenState extends State<PosScreen> {
       if (mounted) {
         context.read<CartBloc>().add(const CartCleared());
       }
+
+      // Auto-print kitchen ticket
+      PrintingService().printKitchenTicket(order);
 
       // Show receipt dialog
       if (mounted) {
