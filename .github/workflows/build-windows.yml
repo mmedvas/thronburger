@@ -1,0 +1,48 @@
+name: Build Windows Installer
+
+# Builds the unsigned NSIS installer for the Thronburger POS Electron app.
+# Runs on a real Windows runner so better-sqlite3 compiles as a native
+# Windows x64 module (can't be done reliably on macOS).
+
+on:
+  # Manual button in the Actions tab (Run workflow).
+  workflow_dispatch:
+  # Also runs automatically when POS code or this workflow changes on main.
+  push:
+    branches: [main]
+    paths:
+      - "thronburger_pos/**"
+      - ".github/workflows/build-windows.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        working-directory: thronburger_pos
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        # postinstall runs electron-builder install-app-deps, which rebuilds
+        # better-sqlite3 against Electron's ABI for Windows x64.
+        run: npm install
+
+      - name: Build Windows installer (NSIS x64)
+        run: npm run dist
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Thronburger-POS-Setup
+          path: thronburger_pos/dist/*.exe
+          if-no-files-found: error
+          retention-days: 30

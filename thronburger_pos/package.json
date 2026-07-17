@@ -1,0 +1,64 @@
+{
+  "name": "thronburger-pos",
+  "productName": "Thronburger POS",
+  "version": "1.0.0",
+  "description": "Offline Windows POS for Thronburger — Berlin x Hewler premium burgers, Empire City, Erbil.",
+  "author": "Thronburger",
+  "license": "UNLICENSED",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "electron-builder --win nsis --x64",
+    "pack": "electron-builder --dir"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1"
+  },
+  "devDependencies": {
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "@electron/rebuild": "^3.7.1"
+  },
+  "build": {
+    "appId": "com.thronburger.pos",
+    "productName": "Thronburger POS",
+    "copyright": "Copyright (c) Thronburger",
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**"
+    ],
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "Thronburger-POS-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Thronburger POS"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self';"
+    />
+    <title>Thronburger POS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Load order matters: helpers first, screens, then the app boot. -->
+    <script src="util.js"></script>
+    <script src="i18n.js"></script>
+    <script src="charts.js"></script>
+    <script src="screens/login.js"></script>
+    <script src="screens/pos.js"></script>
+    <script src="screens/orders.js"></script>
+    <script src="screens/reports.js"></script>
+    <script src="screens/menu.js"></script>
+    <script src="screens/staff.js"></script>
+    <script src="screens/settings.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
